@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">袁连一2024110545</string>
+    <string name="student_name">袁连一</string>
+    <string name="student_id">2024110545</string>
+    <string name="male">男</string>
+    <string name="empty"></string>
+    <string name="name">姓名</string>
+    <string name="gender">性别</string>
+    <string name="number">学号</string>
+    <string name="phone">电话</string>
+    <string name="email">邮件地址</string>
+    <string name="hobby">爱好</string>
+    <string name="profile">姓名：%1$s\n性别：%2$s\n学号：%3$s\n电话：%4$s\n邮件地址：%5$s\n爱好：%6$s\n游戏最高分：%7$d</string>
+    <string name="edit">修改个人信息</string>
+    <string name="game">翻牌游戏</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="restart">重新开始</string>
+    <string name="exit">退出</string>
+    <string name="score">得分：%1$d</string>
+    <string name="back">背面</string>
+    <string name="rules">点两张牌配对：点数相同加16分，花色相同加4分，不匹配扣2分；每次翻开扣1分。</string>
+    <string name="card_description">第%1$d张牌：%2$s</string>
+    <string name="avatar">头像</string>
+</resources>
