@@ -19,7 +19,11 @@
     <string name="exit">退出</string>
     <string name="score">得分：%1$d</string>
     <string name="back">背面</string>
-    <string name="rules">点两张牌配对：点数相同加16分，花色相同加4分，不匹配扣2分；每次翻开扣1分。</string>
+    <string name="rules">三张牌规则：同时翻开三张牌，点数全部相同加32分，花色全部相同加24分，否则扣2分；每翻开一张牌扣1分。</string>
     <string name="card_description">第%1$d张牌：%2$s</string>
     <string name="avatar">头像</string>
+    <string name="menu_about">关于</string>
+    <string name="about_title">关于本应用</string>
+    <string name="about_message">本应用是 Android 移动应用开发实验五的作品：用 RecyclerView 展示 24 张扑克牌，同时翻开三张牌，点数全部相同或花色全部相同即可配对消除。\n\n制作：%1$s %2$s</string>
+    <string name="about_ok">确定</string>
 </resources>

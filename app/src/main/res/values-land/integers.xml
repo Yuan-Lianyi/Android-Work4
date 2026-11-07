@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 横屏时每行显示更多牌，RecyclerView 的列数随之改变。 -->
+    <integer name="card_columns">8</integer>
+</resources>

@@ -3,7 +3,11 @@ package cn.edu.sicnu.cardgame;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.*;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 @SuppressWarnings("deprecation")
 public class AppUiTest extends ActivityInstrumentationTestCase2<MainActivity> {
@@ -27,13 +31,22 @@ public class AppUiTest extends ActivityInstrumentationTestCase2<MainActivity> {
         Activity game = gameMonitor.waitForActivityWithTimeout(5000);
         assertNotNull(game);
         getInstrumentation().waitForIdleSync();
-        android.view.View firstCard = ((GridLayout)game.findViewById(R.id.cards)).getChildAt(0);
+
+        RecyclerView cards = game.findViewById(R.id.cards);
+        assertNotNull(cards.getAdapter());
+        assertEquals(24, cards.getAdapter().getItemCount());
+        View firstCard = cards.getLayoutManager() == null ? null : cards.getLayoutManager().findViewByPosition(0);
+        assertNotNull(firstCard);
         assertTrue(firstCard.getWidth() > 0);
         assertEquals(87f / 57f, (float)firstCard.getHeight() / firstCard.getWidth(), 0.02f);
-        runTestOnUiThread(() -> ((GridLayout)game.findViewById(R.id.cards)).getChildAt(0).performClick());
+
+        final View clicked = firstCard;
+        runTestOnUiThread(clicked::performClick);
         assertEquals(game.getString(R.string.score, -1), ((TextView)game.findViewById(R.id.score)).getText().toString());
+
         runTestOnUiThread(() -> game.findViewById(R.id.restart).performClick());
         assertEquals(game.getString(R.string.score, 0), ((TextView)game.findViewById(R.id.score)).getText().toString());
+
         runTestOnUiThread(() -> { game.findViewById(R.id.exit).performClick(); Player.name = original; });
         getInstrumentation().removeMonitor(editMonitor);
         getInstrumentation().removeMonitor(gameMonitor);

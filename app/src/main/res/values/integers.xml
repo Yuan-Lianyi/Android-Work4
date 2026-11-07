@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 一局游戏的牌数：24 张，竖屏 4 列、横屏 8 列（见 values-land/integers.xml）。 -->
+    <integer name="card_count">24</integer>
+    <integer name="card_columns">4</integer>
+</resources>

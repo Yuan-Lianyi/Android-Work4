@@ -2,26 +2,43 @@ package cn.edu.sicnu.cardgame;
 
 import android.content.Context;
 import android.graphics.*;
+import android.util.AttributeSet;
 import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
 
 /** 57×87 扑克牌；角标与点数直接取自模型，避免图片点数与游戏规则不一致。 */
-final class PlayingCardView extends View {
-    private final Bitmap artwork;
+public final class PlayingCardView extends View {
+    /** 牌面素材只需解码一次，供 RecyclerView 中所有牌共用。 */
+    private static Bitmap artwork;
+
     private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
     private final Rect source = new Rect();
     private final RectF target = new RectF();
     private final Path outline = new Path();
     private Card card;
 
-    PlayingCardView(Context context, Bitmap artwork) {
-        super(context);
-        this.artwork = artwork;
+    public PlayingCardView(Context context) {
+        this(context, null);
+    }
+
+    public PlayingCardView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        ensureArtwork();
         setClickable(true);
         setFocusable(true);
     }
 
-    void show(Card card) { this.card = card; invalidate(); }
+    private void ensureArtwork() {
+        if (artwork == null) {
+            artwork = BitmapFactory.decodeResource(getResources(), R.drawable.yaoji_cards);
+        }
+    }
+
+    /** 绑定要显示的牌，之后由 onDraw 绘制正面或背面。 */
+    void show(Card card) {
+        this.card = card;
+        invalidate();
+    }
 
     @Override protected void onMeasure(int widthSpec, int heightSpec) {
         int width = resolveSize((int)(80 * getResources().getDisplayMetrics().density), widthSpec);
@@ -30,7 +47,7 @@ final class PlayingCardView extends View {
 
     @Override protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (card == null || getWidth() == 0) return;
+        if (card == null || artwork == null || getWidth() == 0) return;
         canvas.save();
         canvas.scale(getWidth() / 570f, getHeight() / 870f);
         outline.reset();
